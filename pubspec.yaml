@@ -1,5 +1,5 @@
 name: digital_waqt_azan
-description: A new Flutter project for Azan and Prayer Times
+description: A Flutter app for Azan and Prayer Times
 
 publish_to: 'none'
 
@@ -12,18 +12,12 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^1.6.0
-  intl: ^0.18.1
   shared_preferences: ^2.2.2
-  flutter_local_notifications: ^16.3.0
-  android_alarm_manager_plus: ^2.1.3
-  workmanager: ^0.4.1
-  geolocator: ^9.0.2
-  permission_handler: ^11.0.1
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true
@@ -31,12 +25,3 @@ flutter:
   assets:
     - assets/
     - assets/audio/
-    - assets/images/
-
-  fonts:
-    - family: Scheherazade
-      fonts:
-        - asset: assets/fonts/ScheherazadeNew-Regular.ttf
-    - family: MeQuran
-      fonts:
-        - asset: assets/fonts/me_quran_volt_newmet.ttf
