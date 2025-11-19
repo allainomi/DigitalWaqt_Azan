@@ -1,24 +1,39 @@
-import 'package:intl/intl.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
+class PrayerTimes {
+  final String fajr;
+  final String sunrise;
+  final String dhuhr;
+  final String asr;
+  final String maghrib;
+  final String isha;
 
-/// A simple mock prayer service. Replace with a real calculation or API.
-class PrayerService {
-  PrayerService();
+  PrayerTimes({
+    required this.fajr,
+    required this.sunrise,
+    required this.dhuhr,
+    required this.asr,
+    required this.maghrib,
+    required this.isha,
+  });
 
-  Map<String, String> getTodayTimes() {
-    final now = DateTime.now();
-    final fmt = DateFormat.Hm();
-    return {
-      'Fajr': fmt.format(DateTime(now.year, now.month, now.day, 5, 10)),
-      'Dhuhr': fmt.format(DateTime(now.year, now.month, now.day, 12, 30)),
-      'Asr': fmt.format(DateTime(now.year, now.month, now.day, 16, 00)),
-      'Maghrib': fmt.format(DateTime(now.year, now.month, now.day, 18, 15)),
-      'Isha': fmt.format(DateTime(now.year, now.month, now.day, 19, 45)),
-    };
+  factory PrayerTimes.fromJson(Map<String, dynamic> json) {
+    return PrayerTimes(
+      fajr: json['Fajr'] ?? '--:--',
+      sunrise: json['Sunrise'] ?? '--:--',
+      dhuhr: json['Dhuhr'] ?? '--:--',
+      asr: json['Asr'] ?? '--:--',
+      maghrib: json['Maghrib'] ?? '--:--',
+      isha: json['Isha'] ?? '--:--',
+    );
   }
 
-  Future<void> initializeTimeZone() async {
-    tz.initializeTimeZones();
+  Map<String, String> toMap() {
+    return {
+      'Fajr': fajr,
+      'Sunrise': sunrise,
+      'Dhuhr': dhuhr,
+      'Asr': asr,
+      'Maghrib': maghrib,
+      'Isha': isha,
+    };
   }
 }
