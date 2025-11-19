@@ -1,39 +1,58 @@
-class PrayerTimes {
-  final String fajr;
-  final String sunrise;
-  final String dhuhr;
-  final String asr;
-  final String maghrib;
-  final String isha;
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import '../models/prayer_times.dart';
 
-  PrayerTimes({
-    required this.fajr,
-    required this.sunrise,
-    required this.dhuhr,
-    required this.asr,
-    required this.maghrib,
-    required this.isha,
-  });
+class PrayerTimeService {
+  static const String _apiUrl = 'http://api.aladhan.com/v1/timings';
 
-  factory PrayerTimes.fromJson(Map<String, dynamic> json) {
-    return PrayerTimes(
-      fajr: json['Fajr'] ?? '--:--',
-      sunrise: json['Sunrise'] ?? '--:--',
-      dhuhr: json['Dhuhr'] ?? '--:--',
-      asr: json['Asr'] ?? '--:--',
-      maghrib: json['Maghrib'] ?? '--:--',
-      isha: json['Isha'] ?? '--:--',
-    );
+  static Future<PrayerTimes> getPrayerTimes(double latitude, double longitude) async {
+    try {
+      final response = await http.get(
+        Uri.parse('$_apiUrl?latitude=$latitude&longitude=$longitude&method=2'),
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final timings = data['data']['timings'];
+        return PrayerTimes.fromJson(timings);
+      } else {
+        throw Exception('Failed to load prayer times');
+      }
+    } catch (e) {
+      // Return default times if API fails
+      return PrayerTimes(
+        fajr: '05:00',
+        sunrise: '06:00',
+        dhuhr: '12:00',
+        asr: '15:00',
+        maghrib: '18:00',
+        isha: '19:00',
+      );
+    }
   }
 
-  Map<String, String> toMap() {
-    return {
-      'Fajr': fajr,
-      'Sunrise': sunrise,
-      'Dhuhr': dhuhr,
-      'Asr': asr,
-      'Maghrib': maghrib,
-      'Isha': isha,
-    };
+  static String getNextPrayer(PrayerTimes times) {
+    final now = DateTime.now();
+    final currentTime = '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
+    
+    final prayerTimes = [
+      {'name': 'Fajr', 'time': times.fajr},
+      {'name': 'Dhuhr', 'time': times.dhuhr},
+      {'name': 'Asr', 'time': times.asr},
+      {'name': 'Maghrib', 'time': times.maghrib},
+      {'name': 'Isha', 'time': times.isha},
+    ];
+
+    for (var prayer in prayerTimes) {
+      if (_isTimeAfter(currentTime, prayer['time']!)) {
+        return prayer['name']!;
+      }
+    }
+    
+    return 'Fajr'; // Default to Fajr if all prayers passed
+  }
+
+  static bool _isTimeAfter(String currentTime, String prayerTime) {
+    return currentTime.compareTo(prayerTime) < 0;
   }
 }
