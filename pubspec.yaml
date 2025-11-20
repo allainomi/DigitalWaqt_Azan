@@ -1,20 +1,41 @@
 name: digital_waqt_azan
+<<<<<<< HEAD
 description: Digital Waqt Azan - assistant prepared example
 publish_to: "none"
 version: 1.0.0+1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
+=======
+description: A Flutter app for Azan and Prayer Times with notifications
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.0 <3.0.0'
+>>>>>>> 7ec5718979b9eadf2590c06d23ed5ed6e78170e0
 
 dependencies:
   flutter:
     sdk: flutter
+<<<<<<< HEAD
   cupertino_icons: ^1.0.6
   audioplayers: ^6.5.1
   flutter_local_notifications: ^17.1.2
   timezone: ^0.9.4
   intl: ^0.18.1
   http: ^0.14.0
+=======
+  http: ^1.1.0
+  intl: ^0.18.1
+  shared_preferences: ^2.2.2
+  flutter_local_notifications: ^16.3.0
+  geolocator: ^9.0.2
+  permission_handler: ^11.0.1
+  android_alarm_manager_plus: ^2.1.3
+>>>>>>> 7ec5718979b9eadf2590c06d23ed5ed6e78170e0
 
 dev_dependencies:
   flutter_test:
@@ -25,5 +46,15 @@ flutter:
   uses-material-design: true
 
   assets:
+<<<<<<< HEAD
     - assets/sounds/azan_manual.mp3
     - assets/images/logo.png
+=======
+    - assets/images/
+    - assets/audio/
+
+  fonts:
+    - family: Urdu
+      fonts:
+        - asset: assets/fonts/urdu_font.ttf
+>>>>>>> 7ec5718979b9eadf2590c06d23ed5ed6e78170e0

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -28,11 +29,22 @@ void main() async {
 class DigitalWaqtAzanApp extends StatelessWidget {
   const DigitalWaqtAzanApp({super.key});
 
+=======
+import 'package:flutter/material.dart';
+import 'package:digital_waqt_azan/screens/home_screen.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+>>>>>>> 7ec5718979b9eadf2590c06d23ed5ed6e78170e0
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Digital Waqt Azan',
       theme: ThemeData(
+<<<<<<< HEAD
         primarySwatch: Colors.teal,
       ),
       home: const HomeScreen(),
@@ -192,3 +204,14 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+=======
+        primarySwatch: Colors.green,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        fontFamily: 'Urdu',
+      ),
+      home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+>>>>>>> 7ec5718979b9eadf2590c06d23ed5ed6e78170e0
